@@ -14,7 +14,7 @@ install:
 - pip install -r requirements.txt
 
 build_script:
-- flet pack app_bar_test.py.py --name app_bar_test.py --icon icon.png --product-name app_bar_test.py --product-version "1.2.3" --copyright "Copyright (c) 2022 YourCompany Inc."
+- flet pack app_bar_test.py --name app_bar_test.py --icon icon.png --product-name app_bar_test.py --product-version "1.2.3" --copyright "Copyright (c) 2022 YourCompany Inc."
 
 test: off
 
@@ -35,10 +35,10 @@ for:
     - image: Visual Studio 2019
 
   after_build:
-  - 7z a app_bar_test.py-windows.zip %CD%\dist\*.exe
+  - 7z a app_bar_test-windows.zip %CD%\dist\*.exe
 
   artifacts:
-  - path: app_bar_test.py-windows.zip
+  - path: app_bar_test-windows.zip
 
 #
 #   macOS package
@@ -49,10 +49,10 @@ for:
     - image: macOS
 
   after_build:
-  - tar -czvf app_bar_test.py-macos.tar.gz -C dist app_bar_test.py.app
+  - tar -czvf app_bar_test-macos.tar.gz -C dist app_bar_test.app
 
   artifacts:
-  - path: app_bar_test.py-macos.tar.gz
+  - path: app_bar_test-macos.tar.gz
 
 #
 #   Linux package
@@ -63,8 +63,8 @@ for:
     - image: Ubuntu
 
   after_build:
-  - tar -czvf app_bar_test.py-linux.tar.gz -C dist app_bar_test.py
+  - tar -czvf app_bar_test-linux.tar.gz -C dist app_bar_test.py
 
   artifacts:
-  - path: app_bar_test.py-linux.tar.gz
+  - path: app_bar_test-linux.tar.gz
 
