@@ -1,31 +1,36 @@
-import flet
-from flet import IconButton, Page, Row, TextField, icons
+import flet as ft
 
-
-def main(page: Page):
-    page.title = "Flet counter example"
-    page.vertical_alignment = "center"
-
-    txt_number = TextField(value="0", text_align="right", width=100)
-
-    def minus_click(e):
-        txt_number.value = int(txt_number.value) - 1
+def main(page: ft.Page):
+    def check_item_clicked(e):
+        e.control.checked = not e.control.checked
         page.update()
+    
+    def show_main_screen():
+        page.clean()
+        page.add(ft.Text("test"))
 
-    def plus_click(e):
-        txt_number.value = int(txt_number.value) + 1
-        page.update()
-
-    page.add(
-        Row(
-            [
-                IconButton(icons.REMOVE, on_click=minus_click),
-                txt_number,
-                IconButton(icons.ADD, on_click=plus_click),
-            ],
-            alignment="center",
-        )
+    page.appbar = ft.AppBar(
+        leading=ft.Icon(ft.icons.PALETTE),
+        leading_width=40,
+        title=ft.Text("AppBar Example"),
+        center_title=False,
+        bgcolor=ft.colors.SURFACE_VARIANT,
+        actions=[
+            ft.ElevatedButton("戻る", on_click=lambda e: show_main_screen(),
+                                            color="PINK400",bgcolor="RED100"),
+            ft.IconButton(ft.icons.WB_SUNNY_OUTLINED),
+            ft.IconButton(ft.icons.FILTER_3),
+            ft.PopupMenuButton(
+                items=[
+                    ft.PopupMenuItem(text="Item 1"),
+                    ft.PopupMenuItem(),  # divider
+                    ft.PopupMenuItem(
+                        text="Checked item", checked=False, on_click=check_item_clicked
+                    ),
+                ]
+            ),
+        ],
     )
+    page.add(ft.Text("Body!"))
 
-
-flet.app(target=main)
+ft.app(target=main)
